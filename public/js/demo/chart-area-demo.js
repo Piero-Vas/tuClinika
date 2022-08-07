@@ -29,12 +29,63 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 
 // Area Chart Example
 var ctx = document.getElementById("myAreaChart");
+var pagosArray = [0,0,0,0,0,0,0,0,0,0,0,0]
+async function tablaPagos(){
+  var pagosPorMeses = await db.collection("citas").where("estadoUser","!=","Inactivo").get();
+  pagosPorMeses.docs.forEach(element => {
+    switch (element.data().mes) {
+      case 1:
+      pagosArray[0] = pagosArray[0] + element.data().precio
+        break;
+      case 2 :
+        pagosArray[1] = pagosArray[1] + element.data().precio
+        break;
+      case 3 :
+        pagosArray[2] = pagosArray[2] + element.data().precio
+        break;
+      case 4 :
+        pagosArray[3] = pagosArray[3] + element.data().precio
+        break;
+      case 5 :
+        pagosArray[4] = pagosArray[4] + element.data().precio
+        break;
+      case 6 :
+        pagosArray[5] = pagosArray[5] + element.data().precio
+        break;
+      case 7 :
+        pagosArray[6] = pagosArray[6] + element.data().precio
+        break;
+      case 8 :
+        pagosArray[7] = pagosArray[7] + element.data().precio
+        break;
+      case 9 :
+        pagosArray[8] = pagosArray[8] + element.data().precio
+        break;
+      case 10 :
+        pagosArray[9] = pagosArray[9] + element.data().precio
+        break;
+      case 11 :
+        pagosArray[10] = pagosArray[10] + element.data().precio
+        break;
+      case 12:
+        pagosArray[11] = pagosArray[11] + element.data().precio
+      default:
+        break;
+    }
+    
+  });
+  myLineChart.update();
+  return pagosArray
+
+}
+console.log(pagosArray)
+
 var myLineChart = new Chart(ctx, {
   type: 'line',
   data: {
-    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
     datasets: [{
-      label: "Earnings",
+      label: "Ganando",
       lineTension: 0.3,
       backgroundColor: "rgba(78, 115, 223, 0.05)",
       borderColor: "rgba(78, 115, 223, 1)",
@@ -46,7 +97,7 @@ var myLineChart = new Chart(ctx, {
       pointHoverBorderColor: "rgba(78, 115, 223, 1)",
       pointHitRadius: 10,
       pointBorderWidth: 2,
-      data: [0, 10000, 5000, 15000, 10000, 20000, 15000, 25000, 20000, 30000, 25000, 40000],
+      data: pagosArray,
     }],
   },
   options: {
@@ -78,7 +129,7 @@ var myLineChart = new Chart(ctx, {
           padding: 10,
           // Include a dollar sign in the ticks
           callback: function(value, index, values) {
-            return '$' + number_format(value);
+            return 'S/.' + number_format(value);
           }
         },
         gridLines: {
@@ -110,9 +161,12 @@ var myLineChart = new Chart(ctx, {
       callbacks: {
         label: function(tooltipItem, chart) {
           var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-          return datasetLabel + ': $' + number_format(tooltipItem.yLabel);
+          return datasetLabel + ': S/.' + number_format(tooltipItem.yLabel);
         }
       }
     }
   }
 });
+
+tablaPagos()
+

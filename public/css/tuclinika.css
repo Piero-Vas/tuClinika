@@ -2,7 +2,7 @@
 html::-webkit-scrollbar {
   width: 8px;     /* Tamaño del scroll en vertical */
   height: 8px;    /* Tamaño del scroll en horizontal */
-  display: none;  /* Ocultar scroll */
+  display: none;  /*Ocultar scroll*/
 }
 
 
@@ -465,9 +465,69 @@ input[type=number] { -moz-appearance:textfield; }
 .calificacion_user{
   margin: 20px 0 20px;
   text-align:start;
-  font-size:1222222px;
+  font-size:11px;
   font-weight: 800;
   color: #252525;
+}
+.suscripcion_title {
+  text-align:center;
+  font-size:16px;
+  font-weight: 900;
+  color: #252525;
+}
+.pagar_cita {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.suscripcion_user{
+  margin: 20px 0 0;
+  text-align:start;
+  font-size:12px;
+  font-weight: 800;
+  color: #252525;
+}
+#nombre_pro_solicitud_modal{
+  text-align: start;
+  border: 0;
+  background-color: transparent;
+}
+.scroll-bg{
+  background-color: transparent;
+}
+.scroll-div{
+   width: 350px;
+   height: 450px;
+   overflow: hidden;
+   overflow-y: scroll;
+}
+.scroll-object{
+  padding: 10px;
+}
+
+.detalle_sub{
+  margin: 20px 0 0;
+  text-align:start;
+  font-size:11px;
+  font-weight: 800;
+  color: #555555;
+}
+.detalle_pago{
+  margin: 20px 0 0;
+  text-align:end;
+  font-size:11px;
+  font-weight: 800;
+  color: #555555;
+}
+.avatar_cita_detail{
+  position: relative;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 20px;
+  background-color: rgb(237, 237, 237);
 }
 .descripcion_user{
   margin: 20px 0 30px;
@@ -529,6 +589,7 @@ input[type=number] { -moz-appearance:textfield; }
 
 #_ver_detail_modal .active, #_ver_detail_modal.accordion:hover {
   background-color: #ccc;
+
 }
 
 #_ver_detail_modal .panel {
@@ -588,13 +649,17 @@ input[type=number] { -moz-appearance:textfield; }
   /* display: flex;
   justify-content: center; */
   /* align-items: center; */
-  height: calc(100vh - 50px);
+  height: calc(100vh - 80px);
   padding: 20px 5px;
   width: 100%;
   border-radius: 20px;
   background: url('../img/png/wallpaper.png')center;
   background-size: cover;
   overflow: auto;
+}
+.mensaje{
+  width: calc(100% - 36px);
+  border-color: #0047BB;
 }
 
 ._ver_chat{
@@ -610,6 +675,34 @@ input[type=number] { -moz-appearance:textfield; }
   }
   
 ._ver_chat_active{
+  right: 0 !important;
+
+}
+.espacio_chat2{
+  /* display: flex;
+  justify-content: center; */
+  /* align-items: center; */
+  height: calc(100vh - 80px);
+  padding: 20px 5px;
+  width: 100%;
+  border-radius: 20px;
+  background: url('../img/png/wallpaper.png')center;
+  background-size: cover;
+  overflow: auto;
+}
+._ver_chat2{
+  background: white;
+    width: 90vw;
+    height: 100vh;
+    max-width: 400px;
+    position: fixed;
+    z-index: 99999999;
+    top: 0;
+    transition: .3s;
+    right: -100%;
+  }
+  
+._ver_chat2_active{
   right: 0 !important;
 
 }

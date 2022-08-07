@@ -163,6 +163,9 @@ oTable_Solicitudes = $("#_table_listas_solicitudes").DataTable({
                     estadoS = 'Rechazada'
                     color = 'danger'
 
+                }else if(data.estado == 3){
+                    estadoS = 'Creado'
+                    color = 'primary'
                 }
                 return `
                 <span class="badge btn-${color}-light-clinika text-${color}" style="padding:5px 8px;font-size:10px">${estadoS}</span>

@@ -147,8 +147,9 @@ oTable_Solicitudes = $("#_table_listas_solicitudes").DataTable({
                     color = 'danger'
                 }
                 return `
+                <button  title="Cambiar estado"  class="badge btn btn-${color}-light-clinika btn-sm btn-icon-split" onclick="cambiarEstadoEliminado('${data.docUsuario}','${data.eliminado}')">
                 <span class="badge btn-${color}-light-clinika text-${color}" style="padding:5px 8px;font-size:10px">${estadoS}</span>
-                
+                </button>
                 `;
             }
         },
@@ -167,7 +168,11 @@ oTable_Solicitudes = $("#_table_listas_solicitudes").DataTable({
                         <i class="fas fa-eye"></i>
                     </span>
                 </button>
-                
+                <button  title="Ver detalles"  class="btn btn-primary btn-primary-clinika btn-sm btn-icon-split" onclick="verModalPagos(this,'${data.docUsuario}')">
+                    <span class="icon text-primary">
+                    <i class="fa fa-clipboard"></i>
+                    </span>
+                </button>
                 `;
             }
         }
@@ -176,6 +181,150 @@ oTable_Solicitudes = $("#_table_listas_solicitudes").DataTable({
 
 });
 
+function verModalPagos(ele,id){
+    getDetailPago(id)
+    
+
+
+}
+function _formatNumber(number) {
+    let numberStr = number.toString();
+    if (number < 10) {
+      numberStr = '0' + numberStr;
+    }
+    return numberStr;
+  }
+function getDetailPago(docUsuario){
+    
+    db.collection("citas")
+    .where('prof','==',docUsuario)
+    .where('estadopro','==','false')
+    .where('estadopago','==','true')
+    .get()
+    .then((querySnapshot)=>{
+        if(querySnapshot.docs.length != 0){
+            $('#_ver_detail_modal_3').modal('show')
+        document.querySelector('.citas_cantidad').innerHTML = `${querySnapshot.docs.length}`
+        let mispagos = document.querySelector('.detalle_citas')
+        mispagos.innerHTML = ''
+        let suma = 0 
+        let boton_pagar = document.getElementById('pagar_cita')
+        boton_pagar.innerHTML = `
+        <button  title="Ver detalles" class="btn btn-sm btn-primary shadow-sm " onclick="pagar('${docUsuario}')">Pagar todas las Cita</button>
+        `
+        querySnapshot.docs.forEach(e=>{
+            let di = document. createElement('div')
+                di.setAttribute('class','det_c')
+                di.innerHTML = `
+                <div class="d-flex justify-content-between align-items-center" style="margin-bottom:20px; padding-bottom: 10px;">
+                <div class="d-flex align-items-center">
+                <div>
+                    <img class="img_prof" src="${e.data().foto==''?'../../img/png/person.png':e.data().foto}" />
+                </div>
+                <div>
+                    <div class="nombreProf">
+                    ${e.data().nombrePaciente}
+                    </div>
+                    <div class="ubigeo_prof">
+                    ${e.data().motivo}
+                    </div>
+                    <div class="d-flex align-items-center">
+                    <div class="ubigeo_prof">
+                    <i>${e.data().hora}</i>
+                    </div>
+                    <div class="vencido" style="margin-left:20px">
+                    </div>
+                    
+                    </div>
+                </div>
+                </div>
+                <div class="d-flex align-items-center">
+                    
+                    <div class="nombreProf" style="margin-left:20px; font-weight: 900;">
+                    S/. ${e.data().precio}
+                    </div>
+                </div>
+            </div>
+                `
+                mispagos.appendChild(di)
+            
+                if(e.data().estadoVencido == 'true'){
+                    document.querySelector(".vencido").innerHTML = `
+                    <span class="badge btn-danger-light-clinika text-danger" style="padding:5px 8px;font-size:10px">Vencido</span>
+                    `
+                }
+            suma += e.data().precio
+            
+        })
+        console.log(suma)
+        document.querySelector('.total').innerHTML = 'S/. ' + suma
+    }else{
+        Swal.fire({
+            position: 'center',
+            icon: 'info',
+            title: 'No cuenta con Pagos disponibles',
+            showConfirmButton: false,
+            timer: 1500
+          });
+
+          $('#_ver_detail_modal_3').modal('hide')
+    }
+    })
+    .catch((error) => {
+        console.log(error)
+    });
+}
+
+function pagar(docUsuario){
+    Swal.fire({
+        title: '¿Aprobar el Pago?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#6659FF',
+        cancelButtonColor: '#bbbbbb',
+        confirmButtonText: 'Si, aprobar!',
+        cancelButtonText: 'Lo pensaré',     
+    }).then((result) => {
+        if (result.isConfirmed) {
+            console.log("ASdwwwwwwwwwww")
+            db.collection("citas")
+            .where("prof","==",docUsuario)
+            .get()
+            .then((response)=>{
+                
+                if(response.length != 0){
+                    
+                    response.forEach(item=>{
+                        db.collection("citas").doc(item.id).update({"estadopro":"true"})
+                        $('#_ver_detail_modal_3').modal('hide')
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'Citas Pagadas correctamente',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    })
+                    
+                    
+                }
+        
+            })
+            .catch((error) => {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: 'Error de servidor',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            });
+        }
+    })
+    
+    
+}
+
 function getSolicitudes() {
     db.collection("usuarios")
         .where("tipoUsuario","==",1)
@@ -183,6 +332,7 @@ function getSolicitudes() {
         .onSnapshot((querySnapshot) => {
             let miarray = [];
             querySnapshot.forEach((doc) => {
+                
                 miarray.push(doc.data());
             });
             console.log(miarray)
@@ -191,8 +341,8 @@ function getSolicitudes() {
 }
 
 function getProfesiones(){
-    let proO = document.getElementById('_opt_profesion')
-    let espO = document.getElementById('_opt_especialidad')
+    let proO = document.getElementById('_profesion_profesional')
+    let espO = document.getElementById('_especialidad_profesional')
     db.collection("profesion")
     .where("eliminado","==",0)
     .orderBy("nombre")
@@ -261,8 +411,12 @@ document.getElementById('_reg_prof').addEventListener('submit',(e)=>{
     let ciudad = document.getElementById('_ciudad_profesional')
     let sexo = document.getElementById('_sexo_profesional')
     let edad = document.getElementById('_edad_profesional')
-    let profesion = document.getElementById('_opt_profesion')
-    let especialidad = document.getElementById('_opt_especialidad')
+    let profesion = document.getElementById('_profesion_profesional')
+    let especialidad = document.getElementById('_especialidad_profesional')
+    let profesionId = document.getElementById('_profesion_profesional_id')
+    let especialidadId = document.getElementById('_especialidad_profesional_id')
+    let foto = document.getElementById('_foto_profesional')
+
 
     if(profesion.value.trim() == '' || especialidad.value.trim() == ''){
         Swal.fire(
@@ -301,19 +455,19 @@ document.getElementById('_reg_prof').addEventListener('submit',(e)=>{
                     'edad'                          : parseInt(edad.value),
                     'eliminado'                     : 0,
                     'email'                         : correo.value,
-                    'especialidad'                  : $('#_opt_especialidad').find('option:selected').text(),
+                    'especialidad'                  : especialidad.value,
                     'fechaRegistro'                 : fin,
                     'fechaRegistroMilisegundos'     : timeAhora,
-                    'foto'                          : '',
-                    'idEspecialidad'                : especialidad.value,
-                    'idProfesion'                   : profesion.value,
+                    'foto'                          : foto.value,
+                    'idEspecialidad'                : especialidadId.value,
+                    'idProfesion'                   : profesionId.value,
                     'idUsuario'                     : miContador,
                     'nombres'                       : nombre.value,
                     'pais'                          : pais.value,
                     'pass'                          : pass.value,
                     'peso'                          : 0,
                     'primeraVez'                    : 1,
-                    'profesion'                     : $('#_opt_profesion').find('option:selected').text(),
+                    'profesion'                     : profesion.value,
                     'sexo'                          : sexo.value,
                     'sobremi'                       : '',
                     'statusConnexion'               : false,
@@ -324,21 +478,46 @@ document.getElementById('_reg_prof').addEventListener('submit',(e)=>{
                     'antecedentes'                  :[],
                     'enfermedades'                  :[],
                     'tratamientos'                  :[],
+                    'busy'                          :false,
+                    'promedioConexion'              :0,
+                    'fechaInicioMilisegundos'       :0,
+                    'numeroVeces'                   :0
                 },{merge: true});
+                console.log(correo.value)
+                const newDocument ={"estado":3}
+                console.log("ASdwwwwwwwwwww")
+                db.collection("pro_solicitudes")
+                .where("estado","==",1)
+                .where("correo","==",correo.value)
+                .get()
+                .then((response)=>{
+                   
+                    if(response.length != 0){
+                       
+                        response.forEach(item=>{
+                            db.collection("pro_solicitudes").doc(item.id).update({"estado":3})
+                        })
+                        
+                        console.log("mmmmmmmmmmmmmmmmmmm")
+                    }
+    
+                })
+
             });
         }).then(() => {
             desactivar(btn)  
             $('#_modal_create_profesional').modal('hide')
             limpiarCrearProfesionales()
             Swal.fire({
-                position: 'top-end',
+                position: 'center',
                 icon: 'success',
                 title: 'Cuenta profesional creada correctamente',
                 showConfirmButton: false,
                 timer: 1500
               })
 
-        }).catch((error) => {
+        })
+        .catch((error) => {
             desactivar(btn)
             console.log(error)
             Swal.fire(
@@ -368,19 +547,106 @@ function limpiarCrearProfesionales(){
     document.getElementById('_edad_profesional').value=''
 }
 
-
-
-
 function modalCrearProfesional(){
-    $('#_modal_create_profesional').modal('show')
+    getDetailProSolicitud();
+    
+    $("#_modal_create_profesional").on("hidden.bs.modal", function () {
+        limpiarCrearProfesionales()
+    })
 }
 
+function getDetailProSolicitud(){
+    db.collection('pro_solicitudes')
+    .where("estado",'==', 1)
+    .get()
+    .then((querySnapshot)=>{
+        if(querySnapshot.docs.length != 0){
+            $('#_modal_create_profesional').modal('show')
+            let misProSolicitud = document.querySelector(".detalle_pro_solicitudes");
+            misProSolicitud.innerHTML = ''
+            querySnapshot.docs.forEach((e) => {
+                let di = document.createElement("div");
+                di.setAttribute("class", "det_s");
+                di.innerHTML = `
+                
+                <div class="row mb-3">
+                
+                <div class="col-2 col-md-2">
+                    <img class="img_prof" src="${
+                      e.data().fotocredencial == ""
+                        ? "../../img/png/person.png"
+                        : e.data().fotocredencial
+                    }" />
+                </div>
+                    <div class="col-6 col-md-6">
+                    <div class="nombreProf">
+                    <button id="nombre_pro_solicitud_modal" type="button" onclick="verDetallePro('${e.data().nombres}','${e.data().apellidos}','${e.data().correo}','${e.data().pais}','${e.data().profesion}','${e.data().especialidad}','${e.data().fotocredencial}','${e.data().idProfesion}','${e.data().idEspecialidad}')">
+                    ${e.data().nombres} ${e.data().apellidos}</button>
+                    </div>
+                    <div class="ubigeo_prof">
+                    <i>${e.data().correo}</i>
+                    </div>
+                    </div>
+                
+                
+                <div class="col-4 col-md-4">
+                <button  title="Ver detalles" type="button" class="btn btn-sm btn-primary shadow-sm"  onclick="verDetallePro('${e.data().nombres}','${e.data().apellidos}','${e.data().correo}','${e.data().pais}','${e.data().profesion}','${e.data().especialidad}','${e.data().fotocredencial}','${e.data().idProfesion}','${e.data().idEspecialidad}')">
+                Ver detalles   
+                </button>
+                </div>
+                </div>
+                `;
+            misProSolicitud.appendChild(di);
+            })
+        } else {
+            $('#_modal_create_profesional').modal('hide');
+            Swal.fire({
+              position: "center",
+              icon: "info",
+              title: "No hay Solicitudes",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+           
+          }
+    })
+    .catch((error) => {
+        console.log(error);
+      });
+}
+
+function verDetallePro(nombre,apellido,correo,pais,profesion,especialidad,foto,idProfesion,idEspecialidad){
+    
+    document.getElementById("_nombre_profesional").value = nombre
+    document.getElementById("_apellido_profesional").value = apellido
+    document.getElementById("_correo_profesional").value = correo
+    document.getElementById("_pass_profesional").value = correo
+    document.getElementById("_pais_profesional").value = pais
+    document.getElementById("_ciudad_profesional").value = "-"
+    document.getElementById("_sexo_profesional").value = "Masculino"
+    document.getElementById("_edad_profesional").value = 0
+    document.getElementById("_profesion_profesional").value = profesion
+    document.getElementById("_especialidad_profesional").value = especialidad
+    document.getElementById("_foto_profesional").value = foto
+    document.getElementById("_profesion_profesional_id").value = idProfesion
+    document.getElementById("_especialidad_profesional_id").value = idEspecialidad
+
+}
 
 function verModalDetalle(ele,id){
     getDetailProfie(id)
+    // getSub(id)
     $('#_ver_detail_modal').modal('show')
 }
 
+function getSub(docUsuario){
+    db.collection("suscripcion")
+    .where("docUsuario","==",docUsuario)
+    .get()
+    .then((querySnapshot)=>{
+        document.querySelector('.detalle_precio').innerHTML = querySnapshot.data().activo
+    })
+}
 
 function getDetailProfie(docUsuario){
     db.collection("usuarios")
@@ -435,7 +701,6 @@ function getDetailProfie(docUsuario){
         let mischat = document.querySelector('.chat_u')
         mischat.innerHTML = ''
         // document.querySelector('.repo_c').innerHTML = `( ${querySnapshot.data().bloqueos.length} )`
-            
             db.collection("salas")
             .where('usuariosChat','array-contains',docUsuario)  
             .get()
@@ -480,7 +745,6 @@ function getDetailProfie(docUsuario){
                     })
                 })
             })
-
 
         let bloqueados = document.querySelector('.bloqueo_u')
         bloqueados.innerHTML = ''
@@ -604,6 +868,7 @@ function getDetailProfie(docUsuario){
             //     console.log(doc.data())
             // });
         })  
+    
         db.collection("salas")
         .where("usuariosChat","array-contains",docUsuario)
         // .where("idUsuario","==",idUsuario)
@@ -750,7 +1015,58 @@ function cerrarChat(){
 
 
 
-
+function cambiarEstadoEliminado(id,estado){
+    Swal.fire({
+        title: estado==1 ? '¿Desea activar al profesional?' : '¿Desea desactivar al profesional?', 
+        text: estado == 1 ? "El profesional podra ser parte de nuestra familia" : "El profesional dejara de ser parte de nuestra familia",
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#6659FF',
+        cancelButtonColor: '#bbbbbb',
+        confirmButtonText: estado==1 ? 'Si, activar!' : 'Si, desactivar!',
+        cancelButtonText: 'Lo pensaré',        
+      }).then((result) => {
+        if (result.isConfirmed) {
+            db.collection("usuarios")
+                .doc(id)
+                .update({
+                    "eliminado": estado == 1 ? 0 : 1
+                }).then(async (querySnapshot) => {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Solicitud aprobada!',
+                        showConfirmButton: false,
+                        timer: 1000
+                    });
+                    if(estado == 0){
+                        
+                        $.ajax({
+                            type: "POST",
+                            url: "https://tuclinika.000webhostapp.com/api/cambioEliminado",
+                            data: `{
+                              "docUsuario": '${id}',
+                              "package": "com.example.tuclinikapro" ,
+                            }`,
+                            success: function (result) {
+                               console.log(result);
+                            },
+                            dataType: "json"
+                          });
+                    }
+                })
+            .catch((error) => {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: 'Error de servidor',
+                    showConfirmButton: false,
+                    timer: 1000
+                })
+            });
+        }
+      })
+}
 
 
 

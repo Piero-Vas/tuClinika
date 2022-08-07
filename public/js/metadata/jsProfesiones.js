@@ -208,6 +208,10 @@ function saveName(ele){
     .update({
         "nombre": valNombre
     })
+    .then(()=>{
+        db.collection("usuarios")
+        .where("profesion","==",val)
+    })
     .then(() => {
         desactivar(ele)
         Swal.fire({

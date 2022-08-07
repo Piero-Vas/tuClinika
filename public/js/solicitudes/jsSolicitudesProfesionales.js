@@ -210,7 +210,7 @@ function aprobarSolicitud(ele,id){
             "estado": 1
             }).then((querySnapshot) => {
                 Swal.fire({
-                    position: 'top-end',
+                    position: 'center',
                     icon: 'success',
                     title: 'Solicitud aprobada! No olvides crear su usuario profesional',
                     showConfirmButton: false,
@@ -219,13 +219,14 @@ function aprobarSolicitud(ele,id){
             })
             .catch((error) => {
                 Swal.fire({
-                    position: 'top-end',
+                    position: 'center',
                     icon: 'error',
                     title: 'Error de servidor',
                     showConfirmButton: false,
                     timer: 1500
                 })
             });
+            
         }
       })
 }
@@ -247,7 +248,7 @@ function desaprobarSolicitud(ele,id){
             "estado": 2
             }).then((querySnapshot) => {
                 Swal.fire({
-                    position: 'top-end',
+                    position: 'center',
                     icon: 'success',
                     title: 'Solicitud rechazada correctamente',
                     showConfirmButton: false,
@@ -256,7 +257,7 @@ function desaprobarSolicitud(ele,id){
             })
             .catch((error) => {
                 Swal.fire({
-                    position: 'top-end',
+                    position: 'center',
                     icon: 'error',
                     title: 'Error de servidor',
                     showConfirmButton: false,

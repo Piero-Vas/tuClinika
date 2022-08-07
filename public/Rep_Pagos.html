@@ -67,17 +67,17 @@
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-database"></i>
                     <span>Metadata</span>
                 </a>
-                <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Administrador:</h6>
+                        <h6 class="collapse-header">Creación de:</h6>
                         <a class="collapse-item" href="Profesiones.html">Profesiones</a>
-                        <a class="collapse-item active" href="Especialidades.html">Especialidades</a>
+                        <a class="collapse-item" href="Especialidades.html">Especialidades</a>
                         <!-- <a class="collapse-item" href="cards.html">Planes</a> -->
                     </div>
                 </div>
@@ -93,7 +93,7 @@
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Tipos:</h6>
+                        <h6 class="collapse-header">Creación de:</h6>
                         <a class="collapse-item" href="Profesionales.html">Profesionales</a>
                         <!-- <a class="collapse-item" href="Naturales.html">Naturales</a> -->
                     </div>
@@ -136,25 +136,25 @@
                     <span>Solicitudes</span>
                 </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item ">
                 <a class="nav-link" href="./Rep_clientes.html" >
                     <i class="fas fa-fw fa-user-injured"></i>
                     <span>Clientes</span>
                 </a>
             </li>
+            
             <li class="nav-item">
                 <a class="nav-link" href="./Rep_Suscripciones.html" >
                     <i class="fas fa-fw fa-star"></i>
                     <span>Suscripciones</span>
                 </a>
             </li>
-            <li class="nav-item ">
-                <a class="nav-link" href="Rep_Pagos.html" >
+            <li class="nav-item active">
+                <a class="nav-link" href="#" >
                     <i class="fas fa-fw fa-wallet"></i>
                     <span>Pagos</span>
                 </a>
             </li>
-
             <hr class="sidebar-divider d-none d-md-block">
             <li class="nav-item">
                 <a class="nav-link" href="./Chats.html" >
@@ -227,7 +227,6 @@
                                 </form>
                             </div>
                         </li>
-
                         <!-- Nav Item - Alerts -->
                         <li class="nav-item dropdown no-arrow mx-1">
                             <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
@@ -321,72 +320,35 @@
                     <div class="row">
 
                         <!-- Content Column -->
-                        <div class="col-lg-4 mb-4">
-
-                            <!-- Project Card Example -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Agregar Especialidad</h6>
-                                    
-                                </div>
-                                <div class="card-body">
-                                    <div class="mb-2">
-                                        <label class="label_input" for="exampleFormControlInput1" class="form-label">Profesión:</label>
-                                        <select class="form-select form_especialidades" aria-label="" id="_opt_profesion" onchange="pickEspeciality(this)">
-                                            <option value="all">Todo</option>
-                                        </select>
-                                    </div>
-                                    <div class="mb-2">
-                                        <label class="label_input" for="exampleFormControlInput1" class="form-label">Nombre:</label>
-                                        <input type="text" class="form-control form-control-sm" id="_nombre_profesion" autocomplete="off">
-                                    </div>
-                                    <div class="mb-2">
-                                        <label class="label_input" for="exampleFormControlInput1" class="form-label">Link imagen:</label>
-                                        <input type="text" class="form-control form-control-sm" oninput="verImagen(this)" id="_link_imagen_profesion" autocomplete="off">
-                                    </div>
-                                    <div class="mb-2 text-center" style="width: 100%;height: 150px;display:flex;justify-content:center;align-items:center">
-                                        <img src="https://firebasestorage.googleapis.com/v0/b/tu-clinika.appspot.com/o/imagen%20(1).png?alt=media&token=940dab5d-cef8-4265-bbe4-0be4b5e3acb2" id="_place_for_image" alt="" style="height: 40%;">
-                                    </div>
-                                    <div class="mb-2">
-                                        <button class="btn btn-primary btn-block col-12 btn-sm" onclick="_save_profesion(this)">
-                                            <span class="text">Agregar</span>
-                                            <div class="spinner-border spinner-border-sm spinner loaderUnactive" role="status">
-                                            </div>
-                                        </button>
-                                      </div>
-                                    
-                                </div>
+                        <div class="col-lg-12 mb-4">
+                            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                                <h1 class="h3 mb-0 text-gray-800"></h1>
+                                <!-- <button onclick="modalCrearProfesional()"  class="d-inline-block d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus fa-sm text-white-50"></i> Crear Profesional</button> -->
                             </div>
-
-                           
-
-                        </div>
-                        <div class="col-lg-8 mb-4">
+                            
 
                             <!-- Project Card Example -->
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Lista de Especialidades</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Lista de pagos</h6>
                                     
                                 </div>
                                 <div class="card-body">
-                                    <table id="_table_listas_especialidades" class="table  dataTable nowrap table-responsive-sm" style="width:100%;border: 1px #d5ddf6 solid;
+                                    <table id="_table_listas_solicitudes" class="table  dataTable nowrap table-responsive-sm" style="width:100%;border: 1px #d5ddf6 solid;
                                     border-radius: 0.45rem;">
                                         <thead>
                                             <tr class="fw-bold fs-6 text-muted">
-                                                <th class="text-center">Foto</th>
-                                                <th>Especialidad</th>
-                                                <th class="text-center">Activo</th>
-                                                <th class="text-center">Posi</th>
-                                                <!-- <th class="text-center"> <i class="fas fa-cog"></i> </th> -->
+                                                <th>Profesional</th>
+                                                <th>Paciente</th>
+                                                <th class="text-center">Fecha Pago Cita</th>
+                                                <th class="text-center">Monto</th>
                                             </tr>
                                         </thead>
                                     </table>
                                 </div>
                             </div>
-                        </div>                        
+                        </div>
                     </div>
-
                 </div>
                 <!-- /.container-fluid -->
 
@@ -414,7 +376,6 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
-    <!-- Logout Modal-->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -446,62 +407,370 @@
         </div>
     </div>
     
-    <div class="modal fade" id="changeName" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+
+   
+    <div class="modal fade" id="_ver_detail_modal_4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
-                <div class="modal-header" style="border: 0;">  
-                    <h6 class="m-0 font-weight-bold text-primary">Nombre de profesión</h6>                 
+                <div class="modal-header" style="border: 0;">   
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <form action="" id="_save_name_form">
-                    <div class="modal-body">
-                        <input type="text" id="_name_new" class="form-control form-control-sm" value="" autocomplete="off">
-                    </div>
-                    <div class="modal-footer" style="border: 0;">
-                        <button class="btn btn-light" type="button" data-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary" id="_guardar_nombre">
-                            <span>Guardar</span> 
-                            <div class="spinner-border spinner-border-sm spinner loaderUnactive" role="status">
+                <div class="modal-body" style="padding: 0 40px;">
+                    <h5 id="titulo" class="modal-title text-center mb-5 mt-3" style="color: #6659ff;font-weight: 800;font-size: 25px;">Chats con el Administrador</h5>   
+                    <div class="scroll-bg col-12">
+                        <div class="scroll-div col-12">
+                            <div class="scroll-object">
+                                <div class="chats" style="margin-bottom: 40px;">
+
+                                </div>
                             </div>
-                        </button>
+                        </div>
                     </div>
-                </form>
+                    
                 </div>
+            
+            </div>
         </div>
     </div>
+    <!-- Logout Modal-->
+    <div class="modal fade" id="_ver_detail_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="border: 0;">   
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                
+                <div class="modal-body" style="padding: 0 40px;">
+                    <!-- <h5 class="modal-title text-center mb-5 mt-3" style="color: #6659ff;font-weight: 800;font-size: 25px;">DATOS DEL PROFESIONAL</h5>                  -->
+                   <div class="row">
+                       <div class="col-12 col-md-6 pl-4 pr-4" style="
+                       border-radius: 0.35rem;">
+                            <div class="card_user_detail shadow">
+                                <div class="box_avatar">
+                                    <div style="position:relative">
+                                        <img src="" alt="" class="avatar_user_detail">
+                                
+                                        <div class="online_detail"></div>
+                                    </div>
+                                </div>
+                                <div class="card_detail">
+                                    <div class="nombre_user">
+                                        <div class="skeleton"></div>
+                                    </div>
+                                    <div class="ubicacion_user">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        <div class="ubi_user" style="display:inline-block">
+                                            <div class="skeleton"></div>                                            
+                                        </div>
+                                    </div>
+                                    <div class="descripcion_user">
+                                        <div class="skeleton"></div>                                            
+                                        
+                                    </div>
+                                    <div class="box_item_detail">
+                                        <div class="edad_user">
+                                            <div class="edad_d edad_"></div>
+                                            <div class="ind_d">Años</div>
+                                        </div>
+                                        <div class="separador_"></div>
+                                        <div class="calificacion_user">                                            
+                                            <div class="edad_d rating_"></div>
+                                            <div class="ind_d">Opiniones</div>
+                                        </div>
+                                        <div class="separador_"></div>
+                                        <div class="cantidad_chats">                                            
+                                            <div class="edad_d chats_"></div>
+                                            <div class="ind_d">Chats</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-3 card_user_detail shadow">
+                                <div class="detalleSsus">
+                                    <div class="detalles_sin_sub"></div>
+                                    <div class="detalles_con_sub"></div>
+                                </div>
+                            </div>
+                           
+                           
+                             
+                       </div>
+                       <div class="col-12 col-md-6 pl-4 pr-4" style="padding: 20px 0;">
+                        <div class="row">
+                            <div class="mb-3 col-md-6 col-12">
+                                <label class="label_input" for="exampleFormControlInput1" class="form-label">Sexo:</label>
+                                <select class="form-select form_especialidades" aria-label="" id="" required disabled>
+                                    <option value="Masculino">Masculino</option>
+                                    <option value="Femenino">Femenino</option>
+                                </select>
+                            </div>
+                            <div class="mb-3 col-md-6 col-12">
+                                <label for="exampleInputEmail1" class="label_input">Edad:</label>
+                                <input type="number" class="form-control form-control-sm edadV_" id="" required  autocomplete="off" disabled>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="mb-3 col-12">
+                                <label for="exampleInputEmail1" class="label_input">Correo:</label>
+                                <input type="email" class="form-control form-control-sm correo_" id="" required  autocomplete="off" disabled>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="mb-3 col-md-6 col-12">
+                                <label for="exampleInputEmail1" class="label_input">Altura:</label>
+                                <input type="text" class="form-control form-control-sm altura_" id="" required  autocomplete="off" disabled>
+                            </div>
+                            <div class="mb-3 col-md-6 col-12">
+                                <label for="exampleInputEmail1" class="label_input">Peso:</label>
+                                <input type="text" class="form-control form-control-sm peso_" id="" required  autocomplete="off" disabled>
+                            </div>
+                        </div>
+                        <div class="row">  
+                            <button class="accordion">
+                                <img src="img/png/chat.png" alt="" style="width: 30px;margin-right: 10px;">
+                                Mis chats <span class="ch_c"></span></button>
+                            <div class="panel chat_u">
+                            
+                            </div>
+                                                      
+                            <button class="accordion">
+                                <img src="img/png/enfermedades.png" alt="" style="width: 30px;margin-right: 10px;">
+                                Enfermedades <span class="en_c"></span> </button>
+                            <div class="panel enfermedades_u">                               
+
+                            </div>
+
+                            <button class="accordion">
+                                <img src="img/png/alergias.png" alt="" style="width: 30px;margin-right: 10px;">
+                                Alergias <span class="al_c"></span></button>
+                            <div class="panel alergias_u">
+                            
+                            </div>
+
+                            <button class="accordion">
+                                <img src="img/png/tratamientos.png" alt="" style="width: 30px;margin-right: 10px;">
+                                Tratamientos <span class="tra_c"></span></button>
+                            <div class="panel tratamientos_u">
+                            
+                            </div>
+                            
+                            <button class="accordion">
+                                <img src="img/png/antecedentes.png" alt="" style="width: 30px;margin-right: 10px;">
+                                Antecedentes <span class="ant_c"></span></button>
+                            <div class="panel antecedentes_u">
+                            
+                            </div>
+                            
+                            <button class="accordion">
+                                <img src="img/png/rating.png" alt="" style="width: 30px;margin-right: 10px;">
+                                Mis opiniones <span class="op_c"></span></button>
+                            <div class="panel rating_u">
+                            
+                            </div>
+                            
+                            <button class="accordion">
+                                <img src="img/png/alerta.png" alt="" style="width: 30px;margin-right: 10px;">
+                                Mis reportes <span class="repo_c"></span></button>
+                            <div class="panel reportes_u">
+                            
+                            </div>
+
+                            <button class="accordion">
+                                <img src="img/png/bloquear.png" alt="" style="width: 30px;margin-right: 10px;">
+                                Usuarios bloqueados <span class="bl_c"></span></button>
+                            <div class="panel bloqueo_u">
+                            
+                            </div>
+
+                            <button class="accordion">
+                                <img src="img/png/historial2.png" alt="" style="width: 30px;margin-right: 10px;">
+                                Suscripciones <span class="sc_c"></span></button>
+                            <div class="panel suscripciones_u">
+                            
+                            </div>
+                            
+                            
+                        </div>
+                            
+                            
+                             
+                       </div>
+                   </div>
+                </div>
+                <div class="modal-footer pt-5 mb-2" style="border: 0;">
+                    <!-- <button class="btn btn-light" type="button" data-dismiss="modal">Cancelar</button>
+                    <button class="btn btn-primary" type="submit" id="_crear_profesional_btn">
+                        <span class="text">Crear usuario</span>
+                                            <div class="spinner-border spinner-border-sm spinner loaderUnactive" role="status">
+                                            </div>
+                    </button>                     -->
+                </div>
+            
+            </div>
+        </div>
+    </div>
+    <div class="sasasas">
+    <div class="modal fade" id="_ver_detail_modal_2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" 
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="border: 0;">   
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                
+                <div class="modal-body" style="padding: 0 40px;">
+                    <h5 class="modal-title text-center mb-3 mt-1" style="color: #6659ff;font-weight: 800;font-size: 25px;">CITAS</h5>                 
+                   <div class="row">
+                       <div class="col-12 col-md-6 pl-4 pr-4" style="
+                       border-radius: 0.35rem;">
+                       
+                        <div class="scroll-bg">
+                            <div class="scroll-div">
+                                <div class="scroll-object">
+                                     <div class="detalle_citas">
+                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                       </div>
+                       <div class="col-12 col-md-6 pl-4 pr-4" >
+                        <div class="suscripcion_title col-md-12">
+                            Detalles de Cita
+                            <i class="fas fa-stethoscope ml-2" style="color: #6659ff;"></i>
+                        </div>
+                        <div class="box_avatar">
+                            <div style="position:relative">
+                                <img src="" alt="" class="avatar_cita_detail">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="detalles_sub col-md-12 col-12">
+
+                                    <div class="suscripcion_user col-md-6">
+                                        Profesional :                
+                                    </div>
+                                    <div class="detalle_sub col-md-6">
+                                        <div class="cita_profesional">Seleccione una cita</div>       
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="detalles_sub col-md-12 col-12">
+
+                                    <div class="suscripcion_user col-md-6">
+                                        Hora :                
+                                    </div>
+                                    <div class="detalle_sub col-md-6">
+                                        <div class="cita_hora">Seleccione una cita</div>       
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="detalles_sub col-md-12 col-12">
+
+                                    <div class="suscripcion_user col-md-6">
+                                        Monto :                
+                                    </div>
+                                    <div class="detalle_sub col-md-6">
+                                        <div class="cita_monto">Seleccione una cita</div>       
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="detalles_sub col-md-12 col-12">
+
+                                    <div class="suscripcion_user col-md-6">
+                                        Motivo :                
+                                    </div>
+                                    <div class="detalle_sub col-md-6">
+                                        <div class="cita_motivo">Seleccione una cita</div>       
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="detalles_sub col-md-12 col-12">
+
+                                    <div class="suscripcion_user col-md-6">
+                                        Descripcion :                
+                                    </div>
+                                    <div class="detalle_sub col-md-6">
+                                        <div class="cita_descripcion">Seleccione una cita</div>       
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- <div class="pagar_cita mt-2 col-md-12">
+                            <button  title="Ver detalles"  class="btn btn-sm btn-primary shadow-sm " onclick="pagar()">Pagar Cita</button>
+                        </div> -->
+
+
+
+                        </div>
+                            
+                            
+                             
+                       </div>
+                   </div>
+                </div>
+            
+            </div>
+        </div>
+    </div>
+    <div class="_ver_chat2 shadow">
+        <div class="header_c">
+            <div>
+                <i class="fas fa-chevron-right" onclick="cerrarChat2()" style="cursor: pointer;color:white"></i>
+            </div>
+            <div>
+                <h5 class="modal-title text-center" style="color: #fff;font-weight: 800;font-size: 20px;"><div class="titulo"></div></h5>                 
+            </div>
+            <div style="width:16px"></div>
+        </div>
+        <div class="espacio_chat2">
+               
+        </div>
+        <div class="body_c">
+            <form action="">
+                <input class="input" placeholder="Mensaje" type="text"><button  title="Ver chat"  class="btn btn-primary btn-primary-clinika btn-sm btn-icon-split" onclick="enviarMensaje()">
+                    <span class="icon" style="border-radius: 0%; border: solid 2px #0047BB; color:#0047BB">
+                    <i class="fa fa-paper-plane" ></i>
+                    </span>
+                </button>
+            </form>
+            
+        </div>
+    </div>
+    <!-- </div> -->
+
+    <div class="_ver_chat shadow">
+        <div class="header_c">
+            <div>
+                <i class="fas fa-chevron-right" onclick="cerrarChat()" style="cursor: pointer;color:white"></i>
+            </div>
+            <div>
+                <h5 class="modal-title text-center" style="color: #fff;font-weight: 800;font-size: 20px;">CHAT</h5>                 
+            </div>
+            <div style="width:16px"></div>
+        </div>
+        <div class="espacio_chat">
+               
+        </div>
+    </div>
+
     
-    <div class="modal fade" id="_change_image" tabindex="-1" role="dialog" aria-labelledby=""
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header" style="border: 0;">  
-                    <h6 class="m-0 font-weight-bold text-primary">Link de imagen</h6>                 
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <form action="" id="_save_image_form">
-                    <div class="modal-body">
-                        <input type="text" id="_link_new" class="form-control form-control-sm"  oninput="verImagenModal(this)" value="" autocomplete="off">
-                    </div>
-                    <div class="mb-2 text-center" style="width: 100%;height: 150px;display:flex;justify-content:center;align-items:center">
-                        <img src="" id="_place_for_image_modal" alt="" style="max-height: 100%;">
-                    </div>
-                    <div class="modal-footer" style="border: 0;">
-                        <button class="btn btn-light" type="button" data-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary" id="_guardar_imagen">
-                            <span>Guardar</span> 
-                            <div class="spinner-border spinner-border-sm spinner loaderUnactive" role="status">
-                            </div>
-                        </button>
-                    </div>
-                </form>
-                </div>
-        </div>
-    </div>
+    
+    
 
     <!-- Bootstrap core JavaScript-->
     <script src="js/general/conn.fire.js"></script>
@@ -518,8 +787,9 @@
     <!-- Page level custom scripts -->
     <script src="js/general/jqueryDatatable.js"></script>
     <script src="js/general/datatable.js"></script>
-    <script src="js/metadata/jsEspecialidades.js"></script>
+    <script src="js/reportes/jsRepPagos.js"></script>
     <script src="js/general/control.js"></script>
+
 </body>
 
 </html>

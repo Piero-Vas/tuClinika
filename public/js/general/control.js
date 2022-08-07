@@ -35,7 +35,7 @@
 
         if(document.querySelector('._pro_solicitudes_dash')){
             db.collection("pro_solicitudes")
-            .where('eliminado',"==",0)
+            .where('estado',"==",0)
             .onSnapshot((querySnapshot) => {
                 document.querySelector('._pro_solicitudes_dash').innerHTML = querySnapshot.size
             });
@@ -43,8 +43,8 @@
         }
        
         if(document.querySelector('._chats_dash')){
-            db.collection("salas")
-            .where('estado',"==",0)
+            db.collection("suscripcion")
+            .where('activo',"==",true)
             .onSnapshot((querySnapshot) => {
                 document.querySelector('._chats_dash').innerHTML = querySnapshot.size
             });
@@ -53,19 +53,20 @@
         
         if(document.querySelector('._user_pro_dash')){
             db.collection("usuarios")
-            .where('eliminado',"==",0)
+            .where('app',"==",2)
             .onSnapshot((querySnapshot) => {
                 document.querySelector('._user_pro_dash').innerHTML = querySnapshot.size
-                let misUsu = []
-                querySnapshot.forEach((e)=>{
-                if(e.data().statusConnexion == true && e.data().tipoUsuario == 1){
-                        misUsu.push(e)
-                    }
-                })
-                document.querySelector('._user_pro_online_dash').innerHTML = misUsu.length
-    
+                    
             });
 
+        }
+        if(document.querySelector('._user_pro_online_dash')){
+            db.collection("usuarios")
+            .where('app',"==",1)
+            .onSnapshot((querySnapshot) => {
+                document.querySelector('._user_pro_online_dash').innerHTML = querySnapshot.size
+                    
+            });
         }
 
 
