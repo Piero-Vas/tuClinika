@@ -166,7 +166,7 @@ oTable_Solicitudes = $("#_table_listas_solicitudes").DataTable({
           color = "danger";
         }
         return `
-                <button  title="Cambiar estado"  class="btn btn-primary btn-primary-clinika btn-sm btn-icon-split" onclick="cambiarEstadoEliminado('${data.docUsuario}','${data.eliminado}')">
+                <button  title="Cambiar estado"  class="btn btn-${color}-light-clinika btn-sm btn-icon-split" onclick="cambiarEstadoEliminado('${data.docUsuario}','${data.eliminado}')">
                 <span class="badge btn-${color}-light-clinika text-${color}" style="padding:5px 8px;font-size:10px">${estadoS}</span>
                 </button>
                 `;
