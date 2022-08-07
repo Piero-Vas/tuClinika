@@ -464,6 +464,7 @@ function getDetailProfie(docUsuario) {
         querySnapshot.data().sobremi == ""
           ? "Sin descripción"
           : querySnapshot.data().sobremi;
+      document.querySelector(".promedio_user").innerHTML = "Promedio Conexión: "+querySnapshot.data().promedioConexion+" min";
       document.querySelector(".edad_").innerHTML = querySnapshot.data().edad;
 
       document.querySelector(".correo_").value = querySnapshot.data().email;

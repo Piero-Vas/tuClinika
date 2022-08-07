@@ -530,9 +530,15 @@ input[type=number] { -moz-appearance:textfield; }
   background-color: rgb(237, 237, 237);
 }
 .descripcion_user{
-  margin: 20px 0 30px;
+  margin: 20px 30px 10px 30px;
   text-align:center;
   font-size:11px;
+  font-weight: 600;
+  color: #8FA7C2;
+}
+.promedio_user{
+  text-align:center;
+  font-size:12px;
   font-weight: 600;
   color: #8FA7C2;
 }
